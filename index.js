@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import http, { get } from "http";
+import http from "http";
 import { Server } from "socket.io";
 import registerRouter from "./routes/registerRoutes.js";
 import loginRouter from "./routes/loginRoutes.js";
@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 // socket initialize
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://chitchat-chir.netlify.app",
     methods: ["GET", "POST"],
   },
 });
@@ -71,7 +71,7 @@ io.on("connection", (socket) => {
       receivedmessage: messagetosend,
       receiverusername,
     });
-   savetodb(senderusername, receiverusername, messagetosend);
+    savetodb(senderusername, receiverusername, messagetosend);
   });
 
   // saving message to db
@@ -82,6 +82,7 @@ io.on("connection", (socket) => {
         receiverusername,
         message: messagetosend,
       });
+      console.log(messagetosend)
       console.log("message saved to DB");
     } catch (error) {
       res.status(500).json({ message: error.message });
