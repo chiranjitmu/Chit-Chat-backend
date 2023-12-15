@@ -82,7 +82,6 @@ io.on("connection", (socket) => {
         receiverusername,
         message: messagetosend,
       });
-      console.log(messagetosend)
       console.log("message saved to DB");
     } catch (error) {
       res.status(500).json({ message: error.message });
