@@ -98,7 +98,7 @@ io.on("connection", (socket) => {
 });
 
 // listener
-app.listen(port1, () => console.log(`listening on localhost ${port1}`));
+app.listen(port1, () => console.log(`listening on ${port1}`));
 server.listen(port2, () => {
   console.log("Server is running");
 });
