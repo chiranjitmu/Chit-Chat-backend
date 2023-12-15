@@ -22,12 +22,12 @@ const login = async (req, res) => {
     const otp = generateOTP();
     const find = await User.findOne({ email });
     if (!find) {
-      return res.status(400).json({ message: "Invalid email" });
+      return res.status(400).json({ message: "Invalid email or Register first" });
     }
     //Check entered pass and db pass match by bcryptcompare
     const isPasswordValid = await bcrypt.compare(password, find.password);
     if (!isPasswordValid) {
-      return res.status(400).json({ message: "Invalid password" });
+      return res.status(400).json({ message: "Invalid password or Register first" });
     }
 
     if (find.verified === "false") {
