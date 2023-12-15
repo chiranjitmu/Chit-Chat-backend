@@ -4,7 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import http, { get } from "http";
-import { Server } from "socket.io"; // Change the import statement
+import { Server } from "socket.io";
 import registerRouter from "./routes/registerRoutes.js";
 import loginRouter from "./routes/loginRoutes.js";
 import verifyRouter from "./routes/verifyotpRoutes.js";
@@ -28,9 +28,8 @@ app.use(bodyParser.json());
 
 // socket initialize
 const io = new Server(server, {
-  // Change the initialization
   cors: {
-    origin: "*",
+    origin: "https://chitchat-chir.netlify.app/",
     methods: ["GET", "POST"],
   },
 });
