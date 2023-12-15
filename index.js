@@ -17,7 +17,6 @@ import getuserlistRouter from "./routes/getuserlistRoutes.js";
 // appconfig
 const app = express();
 dotenv.config();
-const port1 = process.env.PORT1;
 const port2 = process.env.PORT2;
 const server = http.createServer(app);
 
@@ -97,5 +96,6 @@ io.on("connection", (socket) => {
 });
 
 // listener
-app.listen(port1, () => console.log(`listening on ${port1}`));
-
+server.listen(port2, () => {
+  console.log("Server is running");
+});
