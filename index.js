@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 const io = new Server(server, {
   // Change the initialization
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://chitchat-chir.netlify.app/",
     methods: ["GET", "POST"],
   },
 });
