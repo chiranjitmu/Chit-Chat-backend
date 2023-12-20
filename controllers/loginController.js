@@ -42,7 +42,7 @@ const login = async (req, res) => {
       return res.status(400).json({ message: "Not verified" });
     }
     const token = jwt.sign({ email }, process.env.SECRET_KEY, {
-      expiresIn: "7h",
+      expiresIn: "6d",
     });
     res.status(200).json({ message: "Login successful", token });
   } catch (error) {
