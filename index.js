@@ -13,6 +13,7 @@ import getuserRouter from "./routes/getuserRoutes.js";
 import getmessageRouter from "./routes/getmessageRoutes.js";
 import Messageschema from "./models/messageSchema.js";
 import getuserlistRouter from "./routes/getuserlistRoutes.js";
+import sendmailRouter from "./routes/sendmailRoutes.js";
 
 // appconfig
 const app = express();
@@ -46,6 +47,7 @@ app.use("/api/v1/login", loginRouter);
 app.use("/api/v1/otp-verify", verifyRouter);
 app.use("/api/v1/resend-otp", resendRouter);
 app.use("/api/v1/getuser", getuserRouter);
+app.use("/api/v1/sendmail", sendmailRouter);
 app.use("/api/v1/getmessage", getmessageRouter);
 app.use("/api/v1/getuserlist", getuserlistRouter);
 
