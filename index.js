@@ -61,6 +61,7 @@ io.on("connection", (socket) => {
   socket.on("join", async (email) => {
     // Store the user information
     users[email] = { socketId: socket.id };
+    // it will change which and all user present in userlist
     try {
       const filter = { email: email };
       const update = { $set: { online: "true" } };
