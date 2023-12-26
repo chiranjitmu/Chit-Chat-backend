@@ -62,10 +62,10 @@ io.on("connection", (socket) => {
     // Store the user information
     users[email] = { socketId: socket.id };
     try {
-      const filter = { myemail: email };
+      const filter = { email: email };
       const update = { $set: { online: "true" } };
 
-      const result = await UserlistSchema.updateMany(filter, update);
+      await UserlistSchema.updateMany(filter, update);
     } catch (error) {
       console.log(error);
     }
@@ -107,10 +107,10 @@ io.on("connection", (socket) => {
     for (let key of test) {
       if (socket.id === key[1].socketId) {
         try {
-          const filter = { myemail: key[0] };
+          const filter = { email: key[0] };
           const update = { $set: { online: "false" } };
 
-          const result = await UserlistSchema.updateMany(filter, update);
+          await UserlistSchema.updateMany(filter, update);
         } catch (error) {
           console.log(error);
         }
