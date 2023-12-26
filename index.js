@@ -12,6 +12,7 @@ import resendRouter from "./routes/resendotpRoutes.js";
 import getuserRouter from "./routes/getuserRoutes.js";
 import getmessageRouter from "./routes/getmessageRoutes.js";
 import Messageschema from "./models/messageSchema.js";
+import UserlistSchema from "./models/userlistSchema.js";
 import getuserlistRouter from "./routes/getuserlistRoutes.js";
 import sendmailRouter from "./routes/sendmailRoutes.js";
 
@@ -29,7 +30,7 @@ app.use(bodyParser.json());
 // socket initialize
 const io = new Server(server, {
   cors: {
-    origin: "https://chitchat-chir.netlify.app",
+    origin: "https://chitchat-chir.netlify.app/",
     methods: ["GET", "POST"],
   },
 });
@@ -57,9 +58,17 @@ const users = {};
 io.on("connection", (socket) => {
   console.log("A user connected", socket.id);
 
-  socket.on("join", (email) => {
+  socket.on("join", async (email, res) => {
     // Store the user information
     users[email] = { socketId: socket.id };
+    try {
+      const filter = { email: email };
+      const update = { $set: { online: "true" } };
+
+      const result = await UserlistSchema.updateMany(filter, update);
+    } catch (error) {
+      console.log(error);
+    }
   });
 
   socket.on("message", (data) => {
@@ -91,9 +100,22 @@ io.on("connection", (socket) => {
   };
 
   // Handle disconnection
-  socket.on("disconnect", () => {
+  socket.on("disconnect", async () => {
     console.log(`User disconnected: ${socket.id}`);
     delete users[socket.id];
+    const test = Object.entries(users);
+    for (let key of test) {
+      if (socket.id === key[1].socketId) {
+        try {
+          const filter = { email: key[0] };
+          const update = { $set: { online: "false" } };
+
+          const result = await UserlistSchema.updateMany(filter, update);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
   });
 });
 

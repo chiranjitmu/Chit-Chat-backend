@@ -18,26 +18,30 @@ const getuser = async (req, res) => {
           myemail: myemail,
           email: email,
           username: "You",
-          image: user.image
+          image: user.image,
+          online: "false",
         });
         res.status(200).json({
           message: "User Present",
           username: "You",
           email: user.email,
-          image: user.image
+          image: user.image,
+          online: "false",
         });
       } else {
         await Userlist.create({
           myemail: myemail,
           email: email,
           username: user.fullname,
-          image: user.image
+          image: user.image,
+          online: "false",
         });
         res.status(200).json({
           message: "User Present",
           username: user.fullname,
           email: user.email,
-          image: user.image
+          image: user.image,
+          online: "false",
         });
       }
     } else {

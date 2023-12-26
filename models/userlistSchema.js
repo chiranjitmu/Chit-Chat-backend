@@ -17,6 +17,10 @@ const userlistSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  online: {
+    type: String,
+    required: true,
+  }
 });
 
 export default mongoose.model("Userlist", userlistSchema);
