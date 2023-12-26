@@ -61,6 +61,9 @@ io.on("connection", (socket) => {
   socket.on("join", async (email) => {
     // Store the user information
     users[email] = { socketId: socket.id };
+  });
+
+  const online = async () => {
     try {
       const filter = { email: email };
       const update = { $set: { online: "true" } };
@@ -69,7 +72,8 @@ io.on("connection", (socket) => {
     } catch (error) {
       console.log(error);
     }
-  });
+  };
+  online();
 
   socket.on("message", (data) => {
     const { receiverusername, senderusername, messagetosend } = data;
