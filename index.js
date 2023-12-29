@@ -86,6 +86,13 @@ io.on("connection", (socket) => {
     savetodb(senderusername, receiverusername, messagetosend);
   });
 
+  // if typing
+  socket.on("typingtosend", (userimchattingemail, email) => {
+    // Find the socket ID of the recipient based on their email
+    const recipientSocketId2 = users[userimchattingemail]?.socketId;
+    io.to(recipientSocketId2).emit("typingtrue", { emailsend: email });
+  });
+
   // saving message to db
   const savetodb = async (senderusername, receiverusername, messagetosend) => {
     try {
