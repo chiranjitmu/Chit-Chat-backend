@@ -111,8 +111,8 @@ io.on("connection", (socket) => {
   socket.on("disconnect", async () => {
     console.log(`User disconnected: ${socket.id}`);
     delete users[socket.id];
-    const test = Object.entries(users);
-    for (let key of test) {
+    const onlinereverse = Object.entries(users);
+    for (let key of onlinereverse) {
       if (socket.id === key[1].socketId) {
         try {
           const filter = { email: key[0] };
